@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/ITMO prog/Prog/Cpp/Lab 3/main.cpp
+iostream
+-
+src/pugixml.hpp
+E:/ITMO prog/Prog/Cpp/Lab 3/src/pugixml.hpp
+
+E:/ITMO prog/Prog/Cpp/Lab 3/src/pugiconfig.hpp
+
+E:/ITMO prog/Prog/Cpp/Lab 3/src/pugixml.hpp
+pugiconfig.hpp
+E:/ITMO prog/Prog/Cpp/Lab 3/src/pugiconfig.hpp
+stddef.h
+-
+exception
+-
+iterator
+-
+iosfwd
+-
+string
+-
+
