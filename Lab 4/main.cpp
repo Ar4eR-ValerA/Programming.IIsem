@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "algs.cpp"
+#include "algs.hpp"
 
 bool is_4(int x) {
     if (x == 4) {
