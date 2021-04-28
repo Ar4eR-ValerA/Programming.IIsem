@@ -117,7 +117,9 @@ InputIterator algs::find_backward(InputIterator begin, InputIterator end, const 
 
 template<class InputIterator, class UnaryPredicate>
 bool algs::is_palindrome(InputIterator begin, InputIterator end, UnaryPredicate func) {
-    for (auto i = begin, j = end - 1; i != end; ++i, --j) {
+    auto j = end;
+    j--;
+    for (auto i = begin; i != end; ++i, --j) {
         if (func(*i) != func(*j)) {
             return false;
         }
