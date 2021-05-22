@@ -1,11 +1,12 @@
-#ifndef LAB_5_ITERATOR_H
-#define LAB_5_ITERATOR_H
+#ifndef LAB_5_CONST_ITERATOR_H
+#define LAB_5_CONST_ITERATOR_H
+
 #include <iterator>
 #include "circular_buffer.h"
 
 
 template<class value_type>
-class iterator_cb : public std::iterator<std::random_access_iterator_tag, value_type> {
+class const_iterator_cb : public std::iterator<std::random_access_iterator_tag, value_type> {
 private:
     value_type* pointer_ = nullptr;
     value_type* first_ = nullptr;
@@ -17,11 +18,11 @@ private:
 
 
 public:
-    iterator_cb() = default;
+    const_iterator_cb() = default;
 
-    ~iterator_cb() = default;
+    ~const_iterator_cb() = default;
 
-    explicit iterator_cb(value_type* ptr, value_type* first, value_type* last, value_type* begin, value_type* end, diff_type size) :
+    explicit const_iterator_cb(value_type* ptr, value_type* first, value_type* last, value_type* begin, value_type* end, diff_type size) :
             pointer_(ptr),
             first_(first),
             last_(last),
@@ -29,22 +30,22 @@ public:
             end_(end),
             size_(size) {}
 
-    iterator_cb& operator=(const iterator_cb& it) = default;
+    const_iterator_cb& operator=(const const_iterator_cb& it) = default;
 
-    bool operator==(const iterator_cb& it) {
+    bool operator==(const const_iterator_cb& it) {
 
         return pointer_ == it.pointer_;
     }
 
-    bool operator!=(const iterator_cb& it) {
+    bool operator!=(const const_iterator_cb& it) {
         return pointer_ != it.pointer_;
     }
 
-    value_type& operator*() {
+    const value_type& operator*() const {
         return *pointer_;
     }
 
-    iterator_cb &operator++() {
+    const_iterator_cb &operator++() {
         pointer_++;
         if (pointer_ == end_) {
             pointer_ = begin_;
@@ -52,13 +53,13 @@ public:
         return *this;
     }
 
-    iterator_cb operator++(int) {
+    const_iterator_cb operator++(int) {
         value_type prev = *this;
         ++(*this);
         return prev;
     }
 
-    iterator_cb &operator--() {
+    const_iterator_cb &operator--() {
         if (pointer_ == begin_) {
             pointer_ = end_;
         }
@@ -66,13 +67,13 @@ public:
         return *this;
     }
 
-    iterator_cb operator--(int) {
+    const_iterator_cb operator--(int) {
         value_type prev = *this;
         --(*this);
         return prev;
     }
 
-    iterator_cb& operator+=(diff_type n) {
+    const_iterator_cb& operator+=(diff_type n) {
         n = n % size_;
         if (n > end_ - pointer_) {
             pointer_ -= end_ - begin_ - n;
@@ -83,12 +84,12 @@ public:
         return *this;
     }
 
-    iterator_cb operator+(diff_type n) {
+    const_iterator_cb operator+(diff_type n) {
         auto it = *this;
         return it += n;
     }
 
-    iterator_cb& operator-=(diff_type n) {
+    const_iterator_cb& operator-=(diff_type n) {
         n = n % size_;
         if (n > pointer_ - begin_) {
             pointer_ += end_ - begin_ - n;
@@ -99,20 +100,20 @@ public:
         return *this;
     }
 
-    iterator_cb operator-(diff_type n) {
+    const_iterator_cb operator-(diff_type n) {
         auto it = *this;
         return it -= n;
     }
 
-    diff_type operator-(const iterator_cb& it) {
+    diff_type operator-(const const_iterator_cb& it) {
         return pointer_ - it.pointer_;
     }
 
-    value_type& operator[](size_t n) {
+    const value_type& operator[](size_t n) const {
         return *(this += n);
     }
 
-    bool operator<(const iterator_cb &it) {
+    bool operator<(const const_iterator_cb &it) {
         if (pointer_ > first_ && it.pointer_ > first_ || pointer_ < first_ && it.pointer_ < first_) {
             return pointer_ < it.pointer_;
         }
@@ -121,7 +122,7 @@ public:
         }
     }
 
-    bool operator>(const iterator_cb &it) {
+    bool operator>(const const_iterator_cb &it) {
         if (pointer_ > first_ && it.pointer_ > first_ || pointer_ < first_ && it.pointer_ < first_) {
             return pointer_ > it.pointer_;
         }
@@ -130,7 +131,7 @@ public:
         }
     }
 
-    bool operator>=(const iterator_cb &it) {
+    bool operator>=(const const_iterator_cb &it) {
         if (pointer_ > first_ && it.pointer_ > first_ || pointer_ < first_ && it.pointer_ < first_) {
             return pointer_ <= it.pointer_;
         }
@@ -139,7 +140,7 @@ public:
         }
     }
 
-    bool operator<=(const iterator_cb &it) {
+    bool operator<=(const const_iterator_cb &it) {
         if (pointer_ > first_ && it.pointer_ > first_ || pointer_ < first_ && it.pointer_ < first_) {
             return pointer_ >= it.pointer_;
         }
@@ -149,4 +150,4 @@ public:
     }
 };
 
-#endif //LAB_5_ITERATOR_H
+#endif //LAB_5_CONST_ITERATOR_H
